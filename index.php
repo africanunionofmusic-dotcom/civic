@@ -1,19 +1,26 @@
+<?php include "connect.php"; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>civic</title>
+    <title>AUOM Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="main-screen">
-        <div class="messages"></div>
-        <div class= "text-box">
-            <textarea  id="message" name="message" placeholder="please type your message here">sseses</textarea>
-            <button type="button" onclick="getMessage()"> send</button>
-        </div>
-    </div>
-    <script src="./script.js"></script>
+
+<div class="card">
+    <h1>Login</h1>
+
+    <form action="login_process.php" method="POST">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p class="switch">
+        Don’t have an account? <a href="signup.php">Sign Up</a>
+    </p>
+</div>
+
 </body>
 </html>
