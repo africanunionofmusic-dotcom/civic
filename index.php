@@ -8,7 +8,8 @@
 <body>
 
 <div class="card">
-    <h1>Login</h1>
+    <h1>AUOMUSIC<h1>
+    <h2>Login</h2>
 
     <form action="login_process.php" method="POST">
         <input type="email" name="email" placeholder="Email" required>
