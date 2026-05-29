@@ -18,27 +18,125 @@ if(isset($_POST['fullname'], $_POST['email'], $_POST['password'])) {
     $check_result = $check->get_result();
 
     if($check_result->num_rows > 0){
-        echo "This email is already registered! <a href='signup.php'>Try again</a>";
+        echo "
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Email Exists</title>
+            <link rel='stylesheet' href='style.css'>
+        </head>
+        <body>
+
+        <div class='card'>
+            <h1>⚠ Email Already Registered</h1>
+
+            <p class='switch'>
+                This email already exists in AUOM.
+            </p>
+
+            <a href='signup.php' class='login-btn'>
+                Try Again
+            </a>
+        </div>
+
+        </body>
+        </html>
+        ";
         exit();
     }
 
     // Hash password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    // Prepare SQL statement to insert user
+    // Insert new user
     $stmt = $conn->prepare("INSERT INTO users (fullname, email, password) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $fullname, $email, $hashedPassword);
 
     if($stmt->execute()){
-        echo "Signup successful! <a href='login.php'>Login now</a>";
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup Successful</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card">
+
+    <h1>✅ Signup Successful!</h1>
+
+    <p class="switch">
+        Your AUOM account has been created successfully.
+    </p>
+
+    <a href="index.php" class="login-btn">
+        Login Now
+    </a>
+
+</div>
+
+</body>
+</html>
+
+<?php
     } else {
-        echo "Error inserting user: " . $stmt->error;
+        echo "
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Error</title>
+            <link rel='stylesheet' href='style.css'>
+        </head>
+        <body>
+
+        <div class='card'>
+            <h1>❌ Signup Failed</h1>
+
+            <p class='switch'>
+                " . $stmt->error . "
+            </p>
+
+            <a href='signup.php' class='login-btn'>
+                Go Back
+            </a>
+        </div>
+
+        </body>
+        </html>
+        ";
     }
 
     $stmt->close();
     $check->close();
+
 } else {
-    echo "Please fill in all fields!";
+
+    echo "
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Missing Fields</title>
+        <link rel='stylesheet' href='style.css'>
+    </head>
+    <body>
+
+    <div class='card'>
+        <h1>⚠ Missing Fields</h1>
+
+        <p class='switch'>
+            Please fill in all required fields.
+        </p>
+
+        <a href='signup.php' class='login-btn'>
+            Go Back
+        </a>
+    </div>
+
+    </body>
+    </html>
+    ";
 }
 
 $conn->close();

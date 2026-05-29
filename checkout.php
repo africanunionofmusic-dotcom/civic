@@ -73,9 +73,8 @@ $cover = $song['cover'];
     <p><strong>Artist:</strong> <?php echo $artist; ?></p>
     <p><strong>Price:</strong> $<?php echo $price; ?></p>
 
-    <a href="payment_success.php?song_id=<?php echo $song_id; ?>" class="pay-btn">
-        Proceed to Payment
-    </a>
+    <a href="payment_methods.php?song_id=<?php echo $song_id; ?>" class="pay-btn">
+    Pay Now</a>
 </div>
 
 </body>

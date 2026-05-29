@@ -32,7 +32,7 @@ if ($conn->connect_error) {
     <li class="active"><a href="dashboard.php">🏠 Home</a></li>
     <li><a href="mymusic.php">🎵 My Music</a></li>
     <li><a href="upload.php">⬆ Upload</a></li>
-    <li><a href="earnings.php">💰 Earnings</a></li>
+    <li><a href="earnings.php">💰 Artist Dashboard</a></li>
     <li><a href="settings.php">⚙ Settings</a></li>
 </ul>
     </div>

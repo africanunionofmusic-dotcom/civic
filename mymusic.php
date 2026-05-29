@@ -27,7 +27,8 @@ $result = $conn->query($sql);
     <title>My Music Library</title>
     <link rel="stylesheet" href="dashboard.css">
 </head>
-<body>
+<body oncontextmenu="return false;">
+    <div class="content">
 
 <h2>🎧 My Music Library</h2>
 
@@ -39,14 +40,16 @@ if ($result->num_rows > 0) {
 ?>
 
     <div class="music-card">
-        <img src="<?php echo $row['cover']; ?>" class="cover">
+        <div class="cover-wrapper">
+                     <img src="<?php echo $row['cover']; ?>" class="cover">
+        </div>
 
         <p><?php echo $row['title']; ?></p>
         <span><?php echo $row['artist']; ?></span>
 
         <!-- FULL SONG ACCESS -->
-        <audio controls>
-            <source src="<?php echo $row['audio']; ?>" type="audio/mpeg">
+        <audio controls controlsList="nodownload">
+            <source src="stream.php?id=<?php echo $row['id']; ?>" type="audio/mpeg">
         </audio>
     </div>
 
@@ -56,6 +59,8 @@ if ($result->num_rows > 0) {
     echo "<p>No purchased music yet.</p>";
 }
 ?>
+
+</div>
 
 </div>
 

@@ -25,7 +25,7 @@ if(isset($_POST['email'], $_POST['password'])) {
             header("Location: dashboard.php"); // redirect to dashboard
             exit();
         } else {
-            echo "Wrong password! <a href='login.php'>Try again</a>";
+            echo "Wrong password! <a href='index.php'>Try again</a>";
         }
     } else {
         echo "User not found! <a href='signup.php'>Sign up</a>";
@@ -33,7 +33,7 @@ if(isset($_POST['email'], $_POST['password'])) {
 
     $stmt->close();
 } else {
-    echo "Please fill in all fields! <a href='login.php'>Go back</a>";
+    echo "Please fill in all fields! <a href='index.php'>Go back</a>";
 }
 
 $conn->close();

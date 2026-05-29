@@ -19,7 +19,7 @@
     </form>
 
     <p class="switch">
-        Already have an account? <a href="login.php">Login</a>
+        Already have an account? <a href="index.php">Login</a>
     </p>
 </div>
 
