@@ -1,0 +1,10 @@
+uploads/audio/
+uploads/proofs/
+uploads/covers/
+uploads/previews/
+
+*.mp3
+*.wav
+*.jpg
+*.png
+*.lnk
