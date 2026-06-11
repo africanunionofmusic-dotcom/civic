@@ -214,3 +214,37 @@
 .reject-btn:hover{
     background:#dc2626;
 }
+
+.stat-card{
+    text-decoration:none;
+    color:white;
+    transition:0.3s;
+}
+
+.stat-card:hover{
+    transform:translateY(-5px);
+}
+
+.sales-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+    background:#1e293b;
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.sales-table th{
+    background:#0f172a;
+    padding:15px;
+    text-align:left;
+}
+
+.sales-table td{
+    padding:15px;
+    border-top:1px solid #334155;
+}
+
+.sales-table tr:hover{
+    background:#334155;
+}

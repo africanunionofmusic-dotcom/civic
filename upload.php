@@ -10,35 +10,92 @@ if(!isset($_SESSION['user'])){
 <!DOCTYPE html>
 <html>
 <head>
-    
-    <title>Upload Music</title>
+
+    <title>Upload Music - AUOM</title>
     <link rel="stylesheet" href="dashboard.css">
-    
+
 </head>
 <body>
+
 <div class="upload-container">
- <div class="upload-box">
 
-       <h2>Upload Your Music</h2>
+    <div class="upload-box">
 
-      <form action="process_upload.php" method="POST" enctype="multipart/form-data">
+        <h2>Upload Your Music</h2>
 
-        <input type="text" name="title" placeholder="Song Title" required><br><br>
+        <form action="process_upload.php" method="POST" enctype="multipart/form-data">
 
-        <input type="text" name="artist" placeholder="Artist Name" required><br><br>
+            <input
+                type="text"
+                name="title"
+                placeholder="Song Title"
+                required
+            >
 
-        <input type="number" name="price" placeholder="Price (Usd/Ugx)" required><br><br>
+            <br><br>
 
-         <label>Cover Image</label><br>
-             <input type="file" name="cover" accept="image/*" required><br><br>
+            <input
+                type="text"
+                name="artist"
+                placeholder="Artist Name"
+                required
+            >
 
-           <label>Audio File</label><br>
-        <input type="file" name="audio" accept="audio/*" required><br><br>
+            <br><br>
 
-        <button type="submit">Upload</button>
+            <input
+                type="number"
+                name="price"
+                placeholder="Price in USD"
+                min="3"
+                step="0.01"
+                required
+            >
 
-          </form>
+            <p style="
+                color:#94a3b8;
+                font-size:13px;
+                margin-top:8px;
+                margin-bottom:15px;
+            ">
+                Minimum Price: $3<br>
+                Suggested Pricing:<br>
+                🎵 Single: $3 - $5<br>
+                🔥 Hit Song: $5 - $10<br>
+                💿 EP / Album: $10 - $25
+            </p>
+
+            <label>Cover Image</label><br>
+
+            <input
+                type="file"
+                name="cover"
+                accept="image/*"
+                required
+            >
+
+            <br><br>
+
+            <label>Audio File</label><br>
+
+            <input
+                type="file"
+                name="audio"
+                accept="audio/*"
+                required
+            >
+
+            <br><br>
+
+            <button type="submit">
+                Upload Music
+            </button>
+
+        </form>
+
     </div>
+
 </div>
+
 </body>
 </html>

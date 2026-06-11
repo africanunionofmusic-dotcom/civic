@@ -11,6 +11,16 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$user = $_SESSION['user'];
+
+$role_query = $conn->query("
+SELECT role
+FROM users
+WHERE fullname='$user'
+");
+
+$role_data = $role_query->fetch_assoc();
+$role = $role_data['role'];
 ?>
 
 <!DOCTYPE html>
@@ -29,11 +39,43 @@ if ($conn->connect_error) {
         <h2>🎧 AUOM</h2>
 
 <ul>
-    <li class="active"><a href="dashboard.php">🏠 Home</a></li>
-    <li><a href="mymusic.php">🎵 My Music</a></li>
-    <li><a href="upload.php">⬆ Upload</a></li>
-    <li><a href="earnings.php">💰 Artist Dashboard</a></li>
-    <li><a href="settings.php">⚙ Settings</a></li>
+
+    <li class="active">
+        <a href="dashboard.php">🏠 Home</a>
+    </li>
+
+    <li>
+        <a href="mymusic.php">🎵 My Music</a>
+    </li>
+
+    <?php if($role == 'fan'){ ?>
+
+        <li>
+            <a href="become_artist.php">🎤 Auom for Artists</a>
+        </li>
+
+    <?php } ?>
+
+    <?php if($role == 'artist' || $role == 'admin'){ ?>
+
+        <li>
+            <a href="upload.php">⬆ Upload</a>
+        </li>
+
+        <li>
+            <a href="artist_dashboard.php">📊 Artist Dashboard</a>
+        </li>
+
+        <li>
+            <a href="earnings.php">💰 Earnings</a>
+        </li>
+
+    <?php } ?>
+
+    <li>
+        <a href="settings.php">⚙ Settings</a>
+    </li>
+
 </ul>
     </div>
 

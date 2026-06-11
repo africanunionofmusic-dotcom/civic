@@ -15,6 +15,9 @@ $artist = $_POST['artist'];
 $title = $_POST['title'];
 $price = $_POST['price'];
 
+if($price < 3){
+    die("Minimum song price on AUOM is $3");
+}
 // Files
 $cover = $_FILES['cover'];
 $audio = $_FILES['audio'];
@@ -41,8 +44,14 @@ $sql = "INSERT INTO songs (artist, title, price, cover, audio, preview, user)
 VALUES ('$artist', '$title', '$price', '$coverPath', '$audioPath', '$previewPath', '$user')";
 
 if ($conn->query($sql) === TRUE) {
-?>
 
+    $conn->query("
+    UPDATE users
+    SET role='artist'
+    WHERE fullname='$user'
+    ");
+
+?>
 <!DOCTYPE html>
 <html>
 <head>

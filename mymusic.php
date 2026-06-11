@@ -32,6 +32,25 @@ $result = $conn->query($sql);
 
 <h2>🎧 My Music Library</h2>
 
+<div style="text-align:center; margin-bottom:20px;">
+
+    <a href="player.php?mode=ai_dj"
+       style="
+            background:#1db954;
+            padding:12px 20px;
+            border-radius:10px;
+            color:white;
+            text-decoration:none;
+            font-weight:bold;
+            display:inline-block;
+       ">
+
+        🧠 AUOM AI DJ (Play My Library)
+
+    </a>
+
+</div>
+
 <div class="music-grid">
 
 <?php
@@ -41,10 +60,26 @@ if ($result->num_rows > 0) {
 
     <div class="music-card">
         <div class="cover-wrapper">
-                     <img src="<?php echo $row['cover']; ?>" class="cover">
-        </div>
 
-        <p><?php echo $row['title']; ?></p>
+    <a href="player.php?id=<?php echo $row['id']; ?>">
+
+        <img src="<?php echo $row['cover']; ?>" class="cover">
+
+    </a>
+
+</div>
+
+        <p>
+
+              <a
+                   href="player.php?id=<?php echo $row['id']; ?>"
+                       style="color:white;text-decoration:none;">
+
+                          <?php echo $row['title']; ?>
+
+                </a>
+
+           </p>
         <span><?php echo $row['artist']; ?></span>
 
         <!-- FULL SONG ACCESS -->

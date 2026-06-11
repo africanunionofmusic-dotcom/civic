@@ -81,6 +81,8 @@ ORDER BY payments.id DESC
 
             <li><a href="earnings.php">Earnings</a></li>
 
+            <li><a href="admin_withdrawals.php">Withdrawals</a></li>
+
             <li><a href="logout.php">Logout</a></li>
         </ul>
 
