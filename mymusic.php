@@ -45,7 +45,7 @@ $result = $conn->query($sql);
             display:inline-block;
        ">
 
-        🧠 AUOM AI DJ (Play My Library)
+        🧠 AUOM A.I DJ
 
     </a>
 
@@ -81,6 +81,50 @@ if ($result->num_rows > 0) {
 
            </p>
         <span><?php echo $row['artist']; ?></span>
+        <?php
+
+$likes = $conn->query("
+SELECT COUNT(*) AS total
+FROM song_likes
+WHERE song_id='{$row['id']}'
+AND type='Like'
+")->fetch_assoc()['total'];
+
+$comments = $conn->query("
+SELECT COUNT(*) AS total
+FROM song_comments
+WHERE song_id='{$row['id']}'
+")->fetch_assoc()['total'];
+
+?>
+
+<div class="song-engagement">
+
+    <a href="#"
+       class="likeBtn"
+       data-song="<?php echo $row['id']; ?>">
+
+        ❤️
+
+        <span id="likes-<?php echo $row['id']; ?>">
+
+            <?php echo $likes; ?>
+
+        </span>
+
+    </a>
+
+    &nbsp;&nbsp;&nbsp;
+
+    <a href="#"
+       class="comment-link"
+       onclick="openComments(<?php echo $row['id']; ?>);return false;">
+
+        💬 <?php echo $comments; ?>
+
+    </a>
+
+</div>
 
         <!-- FULL SONG ACCESS -->
         <audio controls controlsList="nodownload">
@@ -98,6 +142,107 @@ if ($result->num_rows > 0) {
 </div>
 
 </div>
+<div id="commentsOverlay" class="comments-overlay">
 
+    <div class="comments-window">
+
+        <span id="closeComments" onclick="closeComments()">&times;</span>
+
+        <div id="commentsContent">
+
+            Loading...
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+// =======================
+// AJAX LIKE
+// =======================
+
+document.querySelectorAll(".likeBtn").forEach(button=>{
+
+button.addEventListener("click",function(e){
+
+e.preventDefault();
+
+let song=this.dataset.song;
+
+let form=new FormData();
+
+form.append("song_id",song);
+
+fetch("ajax/like_song.php",{
+
+method:"POST",
+
+body:form
+
+})
+
+.then(response=>response.text())
+
+.then(total=>{
+
+document.getElementById("likes-"+song).innerHTML=total;
+
+});
+
+});
+
+});
+
+
+// =======================
+// COMMENTS POPUP
+// =======================
+
+function openComments(songId){
+
+document.getElementById("commentsOverlay").style.display="flex";
+
+fetch("comments_modal.php?song_id="+songId)
+
+.then(response=>response.text())
+
+.then(data=>{
+
+document.getElementById("commentsContent").innerHTML=data;
+
+});
+
+}
+
+function closeComments(){
+
+document.getElementById("commentsOverlay").style.display="none";
+
+}
+
+document.getElementById("commentsOverlay").onclick=function(e){
+
+if(e.target===this){
+
+closeComments();
+
+}
+
+}
+
+document.addEventListener("keydown",function(e){
+
+if(e.key==="Escape"){
+
+closeComments();
+
+}
+
+});
+
+</script>
 </body>
 </html>
